@@ -1,0 +1,7 @@
+CREATE CONSTRAINT IF NOT EXISTS FOR (w:Word) REQUIRE w.index IS UNIQUE;
+
+
+
+LOAD CSV WITH HEADERS FROM 'file:///nodes(1).csv' AS row MERGE (a:Word {index: row.index, word: row.word, romaji: row.romaji, explanation: row.explanation, properties: row.properties, examples: coalesce(row.examples, "")});
+
+LOAD CSV WITH HEADERS FROM 'file:///edges(1).csv' AS row MERGE (a:Word {index: row.from}) MERGE (b:Word {index: row.to}) MERGE (a)-[r:SIMILAR_TO {similarity: row.similarity}]->(b);

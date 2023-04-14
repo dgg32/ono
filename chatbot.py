@@ -49,24 +49,29 @@ if 'cypher' not in st.session_state:
 if user_input:
 
     cypher = generate_cypher(generate_context(user_input, 'database_results'))
+    # st.session_state.user_input.append(user_input)
+    # st.session_state.cypher.append("")
+    # st.session_state.database_results.append("")
+    # st.session_state.generated.append(cypher)
 
     if not "MATCH" in cypher:
         print('No Cypher was returned')
         st.session_state.user_input.append(user_input)
-        st.session_state.generated.append("")
+        st.session_state.generated.append(
+            cypher)
         st.session_state.cypher.append(
             "No Cypher statement was generated")
         st.session_state.database_results.append("")
     else:
         # Query the database, user ID is hardcoded
         results = run_query(cypher)
-
+        results = results[:10]
         # Graph2text
         answer = generate_response(generate_context(
             f"Question was {user_input} and the response should include only information that is given here: {str(results)}"))
         st.session_state.database_results.append(str(results))
         st.session_state.user_input.append(user_input)
-        st.session_state.generated.append(answer),
+        st.session_state.generated.append(answer)
         st.session_state.cypher.append(cypher)
 
 
@@ -76,17 +81,12 @@ if st.session_state['generated']:
     size = len(st.session_state['generated'])
     # Display only the last three exchanges
 
-    print ("user_input", len(st.session_state['user_input']))
-    print ("generated", len(st.session_state["generated"]))
-    print ("size", size)
-
-    for i in range(max(size-3, 0), size):
-        print (i)
+    for i in range(max(size-4, 0), size):
     #for i in range(len(st.session_state['generated'])-1, -1, -1):
         if st.session_state['user_input'][i]:
-            print ("input", st.session_state['user_input'][i])
+
             message(st.session_state['user_input'][i],is_user=True, key=str(i) + '_user')
         
         if st.session_state["generated"][i]:
-            print ("generated", st.session_state["generated"][i])
+
             message(st.session_state["generated"][i], key=str(i))

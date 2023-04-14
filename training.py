@@ -3,8 +3,8 @@ examples = """
 MATCH (w:Word {word: "はっきり"})
 RETURN w.explanation AS result
 
-# Give me the synonyms of きっちり; Similar words of きっちり? Other words similar to きっちり?
-MATCH (w:Word {word: "きっちり"}) <-[r:SIMILAR_TO]-(o:Word)
+# Give me the synonyms of きっちり; Similar words of きっちり? Other words similar to きっちり? What are the synonyms of きっちり?
+MATCH (w:Word {word: "きっちり"}) -[r:SIMILAR_TO]-(o:Word)
 RETURN o.word AS result LIMIT 10
 
 # How to pronounce うろうろ?; What is the romaji of うろうろ?

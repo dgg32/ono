@@ -11,7 +11,7 @@ RETURN o.word AS result LIMIT 10
 MATCH (w:Word {word: "うろうろ"})
 RETURN w.romaji AS result
 
-# Examples of the word うろうろ?; Show me how to use うろうろ
+# Examples of the word うろうろ?; Show me how to use うろうろ; Show the examples of うろうろ
 MATCH (w:Word {word: "うろうろ"})
 RETURN w.examples AS result
 

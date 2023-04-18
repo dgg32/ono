@@ -16,7 +16,7 @@ def generate_context(prompt, context_data='generated'):
     if "generated" in st.session_state:
         # Add the last three exchanges
         size = len(st.session_state['generated'])
-        for i in range(max(size-3, 0), size):
+        for i in range(max(size-5, 0), size):
             context.append(
                 {'role': 'user', 'content': st.session_state['user_input'][i]})
             context.append(

@@ -58,7 +58,7 @@ pytz==2023.3
 pytz-deprecation-shim==0.1.0.post0
 pywin32==305.1
 pyzmq @ file:///C:/ci/pyzmq_1657615952984/work
-requests==2.28.2
+requests==2.31.0
 retry==0.9.2
 rich==13.3.4
 six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
